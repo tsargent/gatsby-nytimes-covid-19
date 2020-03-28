@@ -7,6 +7,9 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
+      resolve: `gatsby-source-nytimes-covid-19`,
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
