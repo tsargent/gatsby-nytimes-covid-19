@@ -1,21 +1,57 @@
 import React from "react"
-import { Link } from "gatsby"
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
-
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
+const Row = props => (
+  <tr>
+    <td>{props.date}</td>
+    <td>{props.state}</td>
+    <td>{props.cases}</td>
+    <td>{props.deaths}</td>
+  </tr>
 )
 
+const IndexPage = ({ data }) => {
+  const edges = data.allNyTimesCovid19State.edges;
+  return (
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Date
+            </th>
+            <th>
+              State
+            </th>
+            <th>
+              Cases
+            </th>
+            <th>
+              Deaths
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {edges.map(({ node }) => <Row key={node.id} {...node} />)}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
 export default IndexPage
+
+export const pageQuery = graphql`
+  query {
+    allNyTimesCovid19State {
+      edges {
+        node {
+          id
+          state
+          deaths
+          date
+          cases
+        }
+      }
+    }
+  }
+`
