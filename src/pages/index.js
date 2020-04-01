@@ -1,4 +1,6 @@
 import React from "react"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 
 const Row = props => (
   <tr>
@@ -12,7 +14,8 @@ const Row = props => (
 const IndexPage = ({ data }) => {
   const edges = data.allNyTimesCovid19State.edges;
   return (
-    <div>
+    <Layout>
+      <SEO title="Home" />
       <table>
         <thead>
           <tr>
@@ -34,7 +37,7 @@ const IndexPage = ({ data }) => {
           {edges.map(({ node }) => <Row key={node.id} {...node} />)}
         </tbody>
       </table>
-    </div>
+    </Layout>
   )
 }
 
