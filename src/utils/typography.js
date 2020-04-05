@@ -1,6 +1,5 @@
 import Typography from "typography"
-import fairyGateTheme from "typography-theme-fairy-gates"
-
-const typography = new Typography(fairyGateTheme)
+import githubTheme from "typography-theme-github"
+const typography = new Typography(githubTheme)
 
 export default typography
