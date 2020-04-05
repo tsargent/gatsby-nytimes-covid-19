@@ -13,14 +13,14 @@ module.exports = {
     },
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-source-nytimes-covid-19`,
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
       },
+    },
+    {
+      resolve: `gatsby-source-nytimes-covid-19`,
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

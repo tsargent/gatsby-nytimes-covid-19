@@ -1,4 +1,5 @@
 const request = require("request")
+const path = require("path")
 const csv = require("csvtojson")
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
   const { createNode } = actions
@@ -42,13 +43,49 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
   const statesData = await csv().fromStream(request.get(statesUrl));
   const countiesData = await csv().fromStream(request.get(countiesUrl));
 
-  statesData.forEach(state => {
+  const stateRange = [];
+  const countiesRange = [0, 1];
+
+  const statesDataSlice = statesData.slice(...stateRange);
+  const countiesDataSlice = countiesData.slice(...countiesRange);
+
+  statesDataSlice.forEach(state => {
     const nodeData = processStateRow(state);
     createNode(nodeData);
   });
 
-  countiesData.forEach(county => {
+  countiesDataSlice.forEach(county => {
     const nodeData = processCountyRow(county);
     createNode(nodeData);
   });
+}
+
+const createStatePage = (edge, createPage) => {
+  const pageSlug = edge.node.state.toLowerCase().replace(/ /g, "-");
+  const component = path.resolve(`src/templates/state.js`);
+  const context = {
+    state: edge.node.state,
+  };
+  createPage({
+    component,
+    context,
+    path: pageSlug,
+  });
+}
+
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
+  const result = await graphql(`
+  query MyQuery {
+    allNyTimesCovid19State {
+      edges {
+        node {
+          state
+        }
+      }
+    }
+  }`);
+
+  const stateEdges = result.data.allNyTimesCovid19State.edges;
+  stateEdges.forEach(edge => createStatePage(edge, createPage));
 }

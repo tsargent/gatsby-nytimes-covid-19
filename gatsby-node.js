@@ -1,7 +1,22 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+// const path = require(`path`)
+// const { createFilePath } = require(`gatsby-source-filesystem`)
 
-// You can delete this file if you're not using it
+// const createStatePage = node => {
+//   console.log('createStatePage');
+//   console.log(node);
+// }
+
+// https://www.gatsbyjs.org/tutorial/part-seven/
+// exports.onCreateNode = ({ node, getNode, actions }) => {
+//   if(node.internal.type === 'NYTimesCovid19State') {
+//     console.log(node);
+//     console.log(getNode);
+//     const slug = createFilePath({ node, getNode, basePath: `pages`});
+//     console.log(slug);    
+//   }
+  // console.log(node.internal.type === 'NYTimesCovid19County');
+  // console.log(node.internal.type === 'NYTimesCovid19State');
+  // if(node.internal.type === 'NYTimesCovid19State') {
+  //   createStatePage(node);
+  // }
+// }
