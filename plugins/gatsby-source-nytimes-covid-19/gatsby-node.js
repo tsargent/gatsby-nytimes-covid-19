@@ -11,6 +11,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
     const nodeContent = JSON.stringify(row)
     const nodeData = {
       ...row,
+      slug: row.state.toLowerCase().replace(/ /g, "-"),
       id: nodeId,
       parent: null,
       children: [],
@@ -61,7 +62,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
 }
 
 const createStatePage = (edge, createPage) => {
-  const pageSlug = edge.node.state.toLowerCase().replace(/ /g, "-");
+  const pageSlug = edge.node.slug;
   const component = path.resolve(`src/templates/state.js`);
   const context = {
     state: edge.node.state,
@@ -81,6 +82,7 @@ exports.createPages = async ({ graphql, actions }) => {
       edges {
         node {
           state
+          slug
         }
       }
     }

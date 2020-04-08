@@ -1,11 +1,12 @@
 import React from "react"
+import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const Row = props => (
   <tr>
     <td>{props.date}</td>
-    <td>{props.state}</td>
+    <td><Link to={props.slug}>{props.state}</Link></td>
     <td>{props.cases}</td>
     <td>{props.deaths}</td>
   </tr>
@@ -53,6 +54,7 @@ export const pageQuery = graphql`
           deaths
           date
           cases
+          slug
         }
       }
     }
