@@ -1,6 +1,7 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import StateNav from "./StateNav";
 
 const Header = ({ siteTitle }) => (
   <header>
@@ -11,6 +12,7 @@ const Header = ({ siteTitle }) => (
         {siteTitle}
       </Link>
     </h1>
+    <StateNav /> 
   </header>
 )
 
