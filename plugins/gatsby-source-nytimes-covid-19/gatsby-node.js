@@ -62,8 +62,6 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
   });
 
   stateMap.forEach((state, fips) => {
-    // console.log('state', state);
-    // console.log('fips', fips);
     const nodeId = createNodeId(`state-${fips}-${state}`);
     const slug = slugger(state);
     createNode({

@@ -20,8 +20,6 @@ class StateTemplate extends React.Component {
       graphData[1].data[index] = {x: edge.node.date, y: Number(edge.node.deaths)};
     });
 
-    console.log(graphData);
-
     return (
       <Layout>
         <header>
